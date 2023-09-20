@@ -1,10 +1,18 @@
+import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
+import {styles} from '../theme/appTheme';
 
-export const Page1Screen = () => {
+interface Props extends StackScreenProps<any, any> {}
+
+export const Page1Screen = ({navigation}: Props) => {
   return (
-    <View>
-      <Text>Page1Screen</Text>
+    <View style={styles.globalMargin}>
+      <Text style={styles.title}>Page1Screen</Text>
+      <Button
+        title="Go to page 2"
+        onPress={() => navigation.navigate('Page 2')}
+      />
     </View>
   );
 };
