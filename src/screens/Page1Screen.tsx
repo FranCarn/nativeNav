@@ -22,7 +22,9 @@ export const Page1Screen = ({navigation}: Props) => {
         onPress={() => navigation.navigate('Page 2')}
       />
       <Button title="Go person" onPress={() => navigation.navigate('Person')} />
-      <Text>Navigate with arguments</Text>
+      <Text style={{marginVertical: 20, fontSize: 18}}>
+        Navigate with arguments
+      </Text>
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
           style={{...styles.bigBtn, backgroundColor: '#5856D6'}}
