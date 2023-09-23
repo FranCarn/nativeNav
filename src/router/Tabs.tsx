@@ -1,15 +1,20 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {Tab1Screen, Tab2Screen} from '../screens';
 import {StackNavigator} from './StackNavigator';
 import {colors} from '../theme/appTheme';
-import {Text} from 'react-native';
-
-const Tab = createBottomTabNavigator();
+import {Platform, Text} from 'react-native';
 
 export const Tabs = () => {
+  return Platform.OS === 'ios' ? <TabsIOS /> : <TabAndroid />;
+};
+const BottomTabIOS = createBottomTabNavigator();
+const BottomTabAndroid = createMaterialBottomTabNavigator();
+
+const TabsIOS = () => {
   return (
-    <Tab.Navigator
+    <BottomTabIOS.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({color, size, focused}) => {
           let iconName: string = '';
@@ -50,23 +55,78 @@ export const Tabs = () => {
         }}
         component={Tab1Screen}
       /> */}
-      <Tab.Screen
+      <BottomTabIOS.Screen
         name="Tab1Screen"
         options={{
           title: 'Tab 1',
         }}
         component={Tab1Screen}
       />
-      <Tab.Screen
+      <BottomTabIOS.Screen
         name="Tab2Screen"
         options={{title: 'Tab 2'}}
         component={Tab2Screen}
       />
-      <Tab.Screen
+      <BottomTabIOS.Screen
         name="StackNavigator"
         options={{title: 'Stack'}}
         component={StackNavigator}
       />
-    </Tab.Navigator>
+    </BottomTabIOS.Navigator>
+  );
+};
+
+const TabAndroid = () => {
+  return (
+    <BottomTabAndroid.Navigator
+      sceneAnimationEnabled
+      barStyle={{
+        backgroundColor: colors.primary,
+      }}
+      screenOptions={({route}) => ({
+        tabBarIcon: ({color, focused}) => {
+          let iconName: string = '';
+          switch (route.name) {
+            case 'Tab1Screen':
+              iconName = 'T1';
+              break;
+            case 'Tab2Screen':
+              iconName = 'T2';
+              break;
+            case 'StackNavigator':
+              iconName = 'ST';
+              break;
+          }
+
+          return <Text style={{color}}>{iconName}</Text>;
+        },
+        tabBarActiveTintColor: colors.primary,
+        tabBarStyle: {
+          borderTopColor: colors.primary,
+          borderTopWidth: 5,
+          elevation: 0,
+        },
+        tabBarLabelStyle: {
+          fontSize: 13,
+        },
+      })}>
+      <BottomTabAndroid.Screen
+        name="Tab1Screen"
+        options={{
+          title: 'Tab 1',
+        }}
+        component={Tab1Screen}
+      />
+      <BottomTabAndroid.Screen
+        name="Tab2Screen"
+        options={{title: 'Tab 2'}}
+        component={Tab2Screen}
+      />
+      <BottomTabAndroid.Screen
+        name="StackNavigator"
+        options={{title: 'Stack'}}
+        component={StackNavigator}
+      />
+    </BottomTabAndroid.Navigator>
   );
 };
