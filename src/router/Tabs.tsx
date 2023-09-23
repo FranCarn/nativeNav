@@ -6,6 +6,7 @@ import {Tab1Screen} from '../screens';
 import {StackNavigator} from './StackNavigator';
 import {colors} from '../theme/appTheme';
 import {TopTabNavigator} from './TopTabNavigator';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export const Tabs = () => {
   return Platform.OS === 'ios' ? <TabsIOS /> : <TabAndroid />;
@@ -17,7 +18,7 @@ const TabsIOS = () => {
   return (
     <BottomTabIOS.Navigator
       screenOptions={({route}) => ({
-        tabBarIcon: ({color, size, focused}) => {
+        tabBarIcon: ({color, size}) => {
           let iconName: string = '';
           switch (route.name) {
             case 'Tab1Screen':
@@ -85,21 +86,21 @@ const TabAndroid = () => {
         backgroundColor: colors.primary,
       }}
       screenOptions={({route}) => ({
-        tabBarIcon: ({color, focused}) => {
+        tabBarIcon: ({color}) => {
           let iconName: string = '';
           switch (route.name) {
             case 'Tab1Screen':
-              iconName = 'T1';
+              iconName = 'call-outline';
               break;
             case 'Tab2Screen':
-              iconName = 'T2';
+              iconName = 'card-outline';
               break;
             case 'StackNavigator':
-              iconName = 'ST';
+              iconName = 'cash-outline';
               break;
           }
 
-          return <Text style={{color}}>{iconName}</Text>;
+          return <Icon name={iconName} size={20} color={color} />;
         },
         tabBarActiveTintColor: colors.primary,
         tabBarStyle: {
