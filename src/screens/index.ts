@@ -1,3 +1,6 @@
+export * from './AlbumsScreen';
+export * from './ChatScreen';
+export * from './ContactsScreen';
 export * from './Page1Screen';
 export * from './Page2Screen';
 export * from './Page3Screen';
