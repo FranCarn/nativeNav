@@ -2,12 +2,15 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {Sidemenu, StackNavigator} from './src/router/';
+import {AuthProvider} from './src/context';
 
 export const App = () => {
   return (
     <NavigationContainer>
-      <Sidemenu />
-      {/* <StackNavigator /> */}
+      <AuthProvider>
+        <Sidemenu />
+        {/* <StackNavigator /> */}
+      </AuthProvider>
     </NavigationContainer>
   );
 };
