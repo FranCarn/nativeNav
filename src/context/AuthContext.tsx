@@ -1,4 +1,5 @@
-import React, {FC, createContext} from 'react';
+import React, {FC, createContext, useReducer} from 'react';
+import {authReducer} from './authReducer';
 interface Props {
   children: JSX.Element | JSX.Element[];
 }
@@ -20,10 +21,11 @@ export interface AuthContextProps {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export const AuthProvider: FC<Props> = ({children}) => {
+  const [authState, dispatch] = useReducer(authReducer, authInitialState);
   return (
     <AuthContext.Provider
       value={{
-        authState: authInitialState,
+        authState,
         signIn: () => {},
       }}>
       {children}
