@@ -22,11 +22,16 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export const AuthProvider: FC<Props> = ({children}) => {
   const [authState, dispatch] = useReducer(authReducer, authInitialState);
+
+  const signIn = () => {
+    dispatch({type: 'signIn'});
+  };
+
   return (
     <AuthContext.Provider
       value={{
         authState,
-        signIn: () => {},
+        signIn,
       }}>
       {children}
     </AuthContext.Provider>
