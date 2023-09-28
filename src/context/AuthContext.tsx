@@ -17,6 +17,7 @@ export const authInitialState: AuthState = {
 export interface AuthContextProps {
   authState: AuthState;
   changeFavIcon: (icon: string) => void;
+  changeUsername: (icon: string) => void;
   logout: () => void;
   signIn: () => void;
 }
@@ -34,12 +35,16 @@ export const AuthProvider: FC<Props> = ({children}) => {
   const changeFavIcon = (iconName: string) => {
     dispatch({type: 'changeFavIcon', payload: iconName});
   };
+  const changeUsername = (name: string) => {
+    dispatch({type: 'changeUsername', payload: name});
+  };
 
   return (
     <AuthContext.Provider
       value={{
         authState,
         changeFavIcon,
+        changeUsername,
         logout,
         signIn,
       }}>

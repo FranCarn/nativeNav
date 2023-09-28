@@ -4,7 +4,8 @@ type AuthAction =
       type: 'signIn';
     }
   | {type: 'changeFavIcon'; payload: string}
-  | {type: 'logout'};
+  | {type: 'logout'}
+  | {type: 'changeUsername'; payload: string};
 
 export const authReducer = (
   state: AuthState,
@@ -28,6 +29,11 @@ export const authReducer = (
         favoriteIcon: undefined,
         isLoggedIn: false,
         username: undefined,
+      };
+    case 'changeUsername':
+      return {
+        ...state,
+        username: action.payload,
       };
     default:
       return state;
