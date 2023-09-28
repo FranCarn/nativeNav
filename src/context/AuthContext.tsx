@@ -5,9 +5,9 @@ interface Props {
 }
 
 export interface AuthState {
+  favoriteIcon?: string;
   isLoggedIn: boolean;
   username?: string;
-  favoriteIcon?: string;
 }
 
 export const authInitialState: AuthState = {
@@ -16,8 +16,9 @@ export const authInitialState: AuthState = {
 
 export interface AuthContextProps {
   authState: AuthState;
-  signIn: () => void;
   changeFavIcon: (icon: string) => void;
+  logout: () => void;
+  signIn: () => void;
 }
 export const AuthContext = createContext({} as AuthContextProps);
 
@@ -27,6 +28,9 @@ export const AuthProvider: FC<Props> = ({children}) => {
   const signIn = () => {
     dispatch({type: 'signIn'});
   };
+  const logout = () => {
+    dispatch({type: 'logout'});
+  };
   const changeFavIcon = (iconName: string) => {
     dispatch({type: 'changeFavIcon', payload: iconName});
   };
@@ -35,8 +39,9 @@ export const AuthProvider: FC<Props> = ({children}) => {
     <AuthContext.Provider
       value={{
         authState,
-        signIn,
         changeFavIcon,
+        logout,
+        signIn,
       }}>
       {children}
     </AuthContext.Provider>
